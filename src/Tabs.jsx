@@ -32,6 +32,10 @@ export default function Tabs({ tabs }){
 
             </div>
 
+            <div>
+                {tabs[active].content}
+            </div>
+
         </div>
 
     );

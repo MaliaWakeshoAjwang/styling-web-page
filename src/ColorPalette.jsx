@@ -39,9 +39,9 @@ function ThemeSection({ theme, themeName, onUpdate }){
 
   return(
 
-    <div className="flex-1 p-6 bg-gray-50 rounded-xl shadow">
+    <div className="flex-1 p-6 bg-gray-50 rounded-xl shadow min-w-[300px]">
 
-      <h2>{themeName} mode theme</h2>
+      <h2 className="font-bold text-lg mb-4 capitalize">{themeName} mode theme</h2>
 
       {
         Object.entries(theme).map(
@@ -63,7 +63,7 @@ function ThemeSection({ theme, themeName, onUpdate }){
 }
 
 
-function ColorPalette(){
+export default function ColorPalette(){
 
   const[palette, setPalette] = useState(defaultPalette);
 
@@ -84,32 +84,24 @@ function ColorPalette(){
   };
 
   return(
-
-    <div className="min-h-screen bg-gray-100 p-10">
-
-      <h1 className="text-2xl font-bold mb-8">All Colors</h1>
-
-      <div className="flex gap-8">
+    
+    <div className="flex gap-8 flex-wrap">
 
         {
-          ["light", "dark"].map(
+            ["light", "dark"].map(
             (themeKey) => (
-              <ThemeSection
-                key={themeKey}
-                theme={palette[themeKey]}
-                themeName={themeKey}
-                onUpdate={(group, idx, hex) => updateColor(themeKey, group, idx, hex)}
-              />
+                <ThemeSection
+                    key={themeKey}
+                    theme={palette[themeKey]}
+                    themeName={themeKey}
+                    onUpdate={(group, idx, hex) => updateColor(themeKey, group, idx, hex)}
+                />
             )
-          )
+            )
         }
-
-      </div>
-
+        
     </div>
 
   );
 
 }
-
-export default ColorPalette;
