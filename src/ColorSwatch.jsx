@@ -1,14 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
 
 export default function ColorSwatch({ color, onChange }){
     const [showPicker, setShowPicker] = useState(false);
     const [hex, setHex] = useState(color.hex);
+    const pickerRef = useRef();
 
     const handleChange = (newHex) => {
         setHex(newHex);
         onChange(newHex);
     };
+
+    // Close picker on outside click
+    useEffect(
+
+        () => {
+
+            function handleClickOutside(event){
+
+                if ( pickerRef.current && !pickerRef.current.contains(event.target) ) {setShowPicker(false)}
+
+            }
+
+            if (showPicker) {
+                document.addEventListener("mousedown", handleClickOutside);
+            } else {
+                document.removeEventListener("mousedown", handleClickOutside);
+            }
+
+            return () => {
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+
+        }, [showPicker]
+
+    );
 
     return (
         <div className="flex flex-col items-center m-2">
@@ -32,7 +58,7 @@ export default function ColorSwatch({ color, onChange }){
             </span>
 
             {showPicker && (
-                <div className="absolute z-10">
+                <div className="absolute z-10" ref={pickerRef}>
 
                     <HexColorPicker
                         color={hex}
