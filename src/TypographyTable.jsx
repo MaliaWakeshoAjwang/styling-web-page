@@ -8,6 +8,7 @@ import {
 import Select from "react-select";
 import WebFont from "webfontloader";
 import { GOOGLE_FONTS } from "./fonts";
+import GoogleFontPicker from "./GoogleFontPicker";
 
 export default function TypographyTable({
     colorOptions,
@@ -61,28 +62,18 @@ export default function TypographyTable({
             {/* Font pickers above the table */}
             <div className="flex gap-8 mb-6 items-center">
                 <div>
-                    <label className="font-semibold mr-2">Primary Font Family:</label>
-                    <select
+                    <GoogleFontPicker
                         value={primaryFont}
-                        onChange={e => setPrimaryFont(e.target.value)}
-                        className="border rounded px-2 py-1"
-                    >
-                        {GOOGLE_FONTS.map(font => (
-                            <option value={font} key={font}>{font}</option>
-                        ))}
-                    </select>
+                        onChange={setPrimaryFont}
+                        label="Primary Font Family"
+                    />
                 </div>
                 <div>
-                    <label className="font-semibold mr-2">Secondary Font Family:</label>
-                    <select
+                    <GoogleFontPicker
                         value={secondaryFont}
-                        onChange={e => setSecondaryFont(e.target.value)}
-                        className="border rounded px-2 py-1"
-                    >
-                        {GOOGLE_FONTS.map(font => (
-                            <option value={font} key={font}>{font}</option>
-                        ))}
-                    </select>
+                        onChange={setSecondaryFont}
+                        label="Secondary Font Family"
+                    />
                 </div>
             </div>
 
