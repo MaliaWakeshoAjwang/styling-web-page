@@ -19,6 +19,7 @@ export const TEXT_COLORS = [
 export const ALIGNMENTS =[
     { label: "Left", value: "left" },
     { label: "Center", value: "center" },
+    { label: "Right", value: "right"},
 ];
 
 // Each style type with default config
@@ -35,7 +36,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Display Medium",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 36,
         fontWeight: 700,
         color: "#0f1420",
         fontFamily: "Primary Family",
@@ -43,7 +44,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Display Small",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 28,
         fontWeight: 600,
         color: "#0f1420",
         fontFamily: "Primary Family",
@@ -52,7 +53,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Headline Large",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 24,
         fontWeight: 700,
         color: "#0f1420",
         fontFamily: "Primary Family",
@@ -60,7 +61,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Headline Medium",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: 600,
         color: "#0f1420",
         fontFamily: "Primary Family",
@@ -68,7 +69,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Headline Small",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 600,
         color: "#0f1420",
         fontFamily: "Primary Family",
@@ -93,7 +94,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Title Small",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 500,
         color: "#0f1420",
         fontFamily: "Secondary Family",
@@ -102,7 +103,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Label Large",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 400,
         color: "#0f1420",
         fontFamily: "Secondary Family",
@@ -110,7 +111,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Label Medium",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 400,
         color: "#0f1420",
         fontFamily: "Secondary Family",
@@ -118,7 +119,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Label Small",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 11,
         fontWeight: 300,
         color: "#0f1420",
         fontFamily: "Secondary Family",
@@ -135,7 +136,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Body Medium",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: 400,
         color: "#0f1420",
         fontFamily: "Secondary Family",
@@ -143,7 +144,7 @@ export const TYPOGRAPHY_STYLES = [
     {
         name: "Body Small",
         alignment: "center",
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: 300,
         color: "#0f1420",
         fontFamily: "Secondary Family",
