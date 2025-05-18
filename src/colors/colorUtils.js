@@ -1,3 +1,5 @@
+import { palette } from "./palette";
+
 export function getAllColorsFromPalette(palette) {
     const colorSet = new Map();
 

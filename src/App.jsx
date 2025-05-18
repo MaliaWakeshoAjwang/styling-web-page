@@ -1,30 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Tabs from "./Tabs";
-import ColorPalette from "./ColorPalette";
-import TypographyTable from "./TypographyTable";
-import { palette as defaultPalette } from "./palette";
-import { getAllColorsFromPalette } from "./colorUtils";
-import { FONT_FAMILIES } from "./typographyData";
-
-function InfoTab(){
-  return(
-    <div>
-      <h2 className="text-lg font-bold mb-2">About This Design System</h2>
-      <p className="mb-4">Here you can explain what each color and font style is used for in your brand. List usage for primary, secondary, accent colors, headings, body, etc.</p>
-      {/* comment */}
-    </div>
-  )
-}
-
-function DemoTab(){
-  return(
-    <div>
-      <h2 className="text-lg font-bold mb-2">Demo Website Preview</h2>
-      <p className="mb-4">See your chosen colors and fonts in action.</p>
-      {/* comment */}
-    </div>
-  )
-}
+import ColorPalette from "./colors/ColorPalette";
+import TypographyTable from "./typography/TypographyTable";
+import InfoTab from "./info/InfoPage";
+import DemoPage from "./demo/DemoPage";
+import { palette as defaultPalette } from "./colors/palette";
+import { getAllColorsFromPalette } from "./colors/colorUtils";
+import { FONT_FAMILIES } from "./typography/typographyData";
 
 
 function App() {
@@ -32,6 +14,34 @@ function App() {
 
   // Dynamically generate all colors for dropdowns
   const colorOptions = getAllColorsFromPalette(palette);
+  const colorOrder = [
+    "utility - primary text",
+    "utility - secondary text",
+    "brand - primary",
+    "brand - secondary",
+    "brand - tertiary",
+    "brand - alternate",
+    "accent - accent 1",
+    "accent - accent 2",
+    "accent - accent 3",
+    "accent - accent 4",
+    "semantic - success",
+    "semantic - error",
+    "semantic - warning",
+    "semantic - info",
+    "utility - primary bg",
+    "utility - secondary bg",
+  ];
+  const orderedColorOptions = colorOptions.slice().sort((a, b) => {
+    const ai = colorOrder.indexOf(a.label);
+    const bi = colorOrder.indexOf(b.label);
+
+    // Not found labels go at the end
+    if (ai === -1 && bi === -1) return 0;
+    if (ai === -1) return 1;
+    if (bi === -1) return -1;
+    return ai - bi;
+  });
 
   // ...your font states and handlers
   const [primaryFont, setPrimaryFont] = useState(FONT_FAMILIES[0].value);
@@ -57,14 +67,14 @@ function App() {
             { label: "Info", content: <InfoTab /> },
             { label: "Colors", content: <ColorPalette palette={palette} setPalette={setPalette} /> },
             { label: "Typography", content: <TypographyTable
-              colorOptions={colorOptions}
+              colorOptions={orderedColorOptions}
               primaryFont={primaryFont}
               setPrimaryFont={setPrimaryFont}
               secondaryFont={secondaryFont}
               setSecondaryFont={setSecondaryFont}
               googleFontsList={googleFontsList}
             /> },
-            { label: "Demo", content: <DemoTab /> },
+            { label: "Demo", content: <DemoPage /> },
           ]
         }
       />
