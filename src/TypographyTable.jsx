@@ -139,6 +139,7 @@ export default function TypographyTable({
                         <th className="py-2 px-3 border">Alignment</th>
                         <th className="py-2 px-3 border">Font Size</th>
                         <th className="py-2 px-3 border">Letter Spacing</th>
+                        <th className="py-2 px-3 border">Line Height</th>
                         <th className="py-2 px-3 border">Italics</th>
                         <th className="py-2 px-3 border">Font Weight</th>
                         <th className="py-2 px-3 border">Color</th>
@@ -190,6 +191,19 @@ export default function TypographyTable({
                                         onChange={e => handleChange(idx, "letterSpacing", parseFloat(e.target.value))}
                                         min={-5}
                                         max={5}
+                                    />
+                                </td>
+
+                                {/* Line Height */}
+                                <td className="py-2 px-3 border">
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        className="border rounded px-2 py-1 w-20"
+                                        value={style.lineHeight ?? 1.2}
+                                        onChange={e => handleChange(idx, "lineHeight", parseFloat(e.target.value))}
+                                        min={0.7}
+                                        max={3}
                                     />
                                 </td>
 
@@ -258,6 +272,7 @@ export default function TypographyTable({
                                         textAlign: style.alignment,
                                         fontSize: `${style.fontSize}px`,
                                         letterSpacing: `${style.letterSpacing ?? 0}px`,
+                                        lineHeight: style.lineHeight ?? 1.2,
                                         fontStyle: style.italic ? "italic" : "normal",
                                         fontWeight: style.fontWeight,
                                         fontFamily: getActualFontFamily(style.fontFamily),

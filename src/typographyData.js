@@ -39,6 +39,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Primary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Display Medium",
@@ -49,6 +50,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Primary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Display Small",
@@ -59,6 +61,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Primary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
 
     {
@@ -70,6 +73,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Primary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Headline Medium",
@@ -80,6 +84,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Primary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Headline Small",
@@ -90,6 +95,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Primary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
 
     {
@@ -101,6 +107,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Primary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Title Medium",
@@ -111,6 +118,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Secondary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Title Small",
@@ -121,6 +129,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Secondary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
 
     {
@@ -132,6 +141,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Secondary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Label Medium",
@@ -142,6 +152,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Secondary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Label Small",
@@ -152,6 +163,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Secondary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
 
     {
@@ -163,6 +175,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Secondary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Body Medium",
@@ -173,6 +186,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Secondary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
     {
         name: "Body Small",
@@ -183,6 +197,7 @@ export const TYPOGRAPHY_STYLES = [
         fontFamily: "Secondary Family",
         letterSpacing: 0,
         italic: false,
+        lineHeight: 1.2,
     },
 
 ]
