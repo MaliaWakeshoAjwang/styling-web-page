@@ -1,22 +1,13 @@
 import React from "react";
 import Tabs from "./Tabs";
 import ColorPalette from "./ColorPalette";
+import TypographyTable from "./TypographyTable";
 
 function InfoTab(){
   return(
     <div>
       <h2 className="text-lg font-bold mb-2">About This Design System</h2>
       <p className="mb-4">Here you can explain what each color and font style is used for in your brand. List usage for primary, secondary, accent colors, headings, body, etc.</p>
-      {/* comment */}
-    </div>
-  )
-}
-
-function TypographyTab(){
-  return(
-    <div>
-      <h2 className="text-lg font-bold mb-2">Typography Picker</h2>
-      <p className="mb-4">Here you’ll build your font selector, preview, etc.</p>
       {/* comment */}
     </div>
   )
@@ -42,7 +33,7 @@ function App() {
           [
             { label: "Info", content: <InfoTab /> },
             { label: "Colors", content: <ColorPalette /> },
-            { label: "Typography", content: <TypographyTab /> },
+            { label: "Typography", content: <TypographyTable /> },
             { label: "Demo", content: <DemoTab /> },
           ]
         }

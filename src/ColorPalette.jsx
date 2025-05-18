@@ -50,7 +50,7 @@ function ThemeSection({ theme, themeName, onUpdate }){
               key={groupName}
               groupName={groupName}
               colors={colors}
-              onUpdate={(g, i, hex) => onUpdate(groupName, i, hex)}
+              onUpdate={(i, hex) => onUpdate(groupName, i, hex)}
             />
           )
         )

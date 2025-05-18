@@ -9,8 +9,8 @@ export const palette = {
         utility: [
             { name: "primary text", hex: "#1236d8" },
             { name: "secondary text", hex: "#1236d8" },
-            { name: "primary background", hex: "#1236d8" },
-            { name: "secondary background", hex: "#1236d8" },
+            { name: "primary bg", hex: "#1236d8" },
+            { name: "secondary bg", hex: "#1236d8" },
         ],
         accent: [
             { name: "accent 1", hex: "#1236d8" },
@@ -35,8 +35,8 @@ export const palette = {
         utility: [
             { name: "primary text", hex: "#1236d8" },
             { name: "secondary text", hex: "#1236d8" },
-            { name: "primary background", hex: "#1236d8" },
-            { name: "secondary background", hex: "#1236d8" },
+            { name: "primary bg", hex: "#1236d8" },
+            { name: "secondary bg", hex: "#1236d8" },
         ],
         accent: [
             { name: "accent 1", hex: "#1236d8" },
