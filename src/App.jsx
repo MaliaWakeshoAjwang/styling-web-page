@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Tabs from "./Tabs";
 import ColorPalette from "./ColorPalette";
 import TypographyTable from "./TypographyTable";
+import { palette as defaultPalette } from "./palette";
+import { getAllColorsFromPalette } from "./colorUtils";
+import { FONT_FAMILIES } from "./typographyData";
 
 function InfoTab(){
   return(
@@ -25,20 +28,41 @@ function DemoTab(){
 
 
 function App() {
+  const [palette, setPalette] = useState(defaultPalette);
+
+  // Dynamically generate all colors for dropdowns
+  const colorOptions = getAllColorsFromPalette(palette);
+
+  // ...your font states and handlers
+  const [primaryFont, setPrimaryFont] = useState(FONT_FAMILIES[0].value);
+  const [secondaryFont, setSecondaryFont] = useState(FONT_FAMILIES[1].value);
+
   return (
+
     <div className="min-h-screen bg-gray-100 p-10">
+
       <h1 className="text-2xl font-bold mb-8">Styling Web Page Helper</h1>
+
       <Tabs
         tabs={
           [
             { label: "Info", content: <InfoTab /> },
-            { label: "Colors", content: <ColorPalette /> },
-            { label: "Typography", content: <TypographyTable /> },
+            { label: "Colors", content: <ColorPalette palette={palette} setPalette={setPalette} /> },
+            { label: "Typography", content: <TypographyTable
+              colorOptions={colorOptions}
+              primaryFont={primaryFont}
+              setPrimaryFont={setPrimaryFont}
+              secondaryFont={secondaryFont}
+              setSecondaryFont={setSecondaryFont}
+              fontFamilyOptions={FONT_FAMILIES}
+            /> },
             { label: "Demo", content: <DemoTab /> },
           ]
         }
       />
+
     </div>
+
   );
 }
 
