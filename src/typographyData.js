@@ -4,15 +4,15 @@ export const FONT_FAMILIES = [
 ];
 
 export const FONT_WEIGHTS = [
-    { label: "Thin", value: 400 },
-    { label: "Extra Light", value: 400 },
-    { label: "Light", value: 400 },
+    { label: "Thin", value: 100 },
+    { label: "Extra Light", value: 200 },
+    { label: "Light", value: 300 },
     { label: "Normal", value: 400 },
-    { label: "Medium", value: 400 },
-    { label: "Semi Bold", value: 400 },
-    { label: "Bold", value: 400 },
-    { label: "Extra Bold", value: 400 },
-    { label: "Black", value: 400 },
+    { label: "Medium", value: 500 },
+    { label: "Semi Bold", value: 600 },
+    { label: "Bold", value: 700 },
+    { label: "Extra Bold", value: 800 },
+    { label: "Black", value: 900 },
 ];
 
 export const TEXT_COLORS = [

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tabs from "./Tabs";
 import ColorPalette from "./ColorPalette";
 import TypographyTable from "./TypographyTable";
@@ -37,6 +37,14 @@ function App() {
   const [primaryFont, setPrimaryFont] = useState(FONT_FAMILIES[0].value);
   const [secondaryFont, setSecondaryFont] = useState(FONT_FAMILIES[1].value);
 
+  const [googleFontsList, setGoogleFontsList] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${import.meta.env.VITE_GOOGLE_FONTS_API_KEY}`)
+      .then(res => res.json())
+      .then(data => setGoogleFontsList(data.items || []));
+  }, []);
+
   return (
 
     <div className="min-h-screen bg-gray-100 p-10">
@@ -54,7 +62,7 @@ function App() {
               setPrimaryFont={setPrimaryFont}
               secondaryFont={secondaryFont}
               setSecondaryFont={setSecondaryFont}
-              fontFamilyOptions={FONT_FAMILIES}
+              googleFontsList={googleFontsList}
             /> },
             { label: "Demo", content: <DemoTab /> },
           ]
