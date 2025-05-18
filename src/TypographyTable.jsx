@@ -27,6 +27,28 @@ export default function TypographyTable({
         );
     };
 
+    // Load the chosen font when changed
+    const loadFont = font => {
+
+        if (!font) return;
+
+        WebFont.load({
+            google: {
+                families: [font],
+            },
+        });
+
+    };
+
+    // Ensure selected font is loaded
+    React.useEffect(() => {
+        loadFont(primaryFont);
+    }, [primaryFont]);
+
+    React.useEffect(() => {
+        loadFont(secondaryFont);
+    }, [secondaryFont]);
+
     // This ensures that "Primary Family" or "Secondary Family" uses the selected fonts
     const getActualFontFamily = (fontFamily) => {
         if (fontFamily === "Primary Family") return primaryFont;
@@ -45,8 +67,8 @@ export default function TypographyTable({
                         onChange={e => setPrimaryFont(e.target.value)}
                         className="border rounded px-2 py-1"
                     >
-                        {fontFamilyOptions.map(f => (
-                            <option value={f.value} key={f.value}>{f.label || f.value}</option>
+                        {GOOGLE_FONTS.map(font => (
+                            <option value={font} key={font}>{font}</option>
                         ))}
                     </select>
                 </div>
@@ -57,8 +79,8 @@ export default function TypographyTable({
                         onChange={e => setSecondaryFont(e.target.value)}
                         className="border rounded px-2 py-1"
                     >
-                        {fontFamilyOptions.map(f => (
-                            <option value={f.value} key={f.value}>{f.label || f.value}</option>
+                        {GOOGLE_FONTS.map(font => (
+                            <option value={font} key={font}>{font}</option>
                         ))}
                     </select>
                 </div>
@@ -140,8 +162,6 @@ export default function TypographyTable({
                                     onChange={(e) => handleChange(idx, "fontFamily", e.target.value)}
                                     className="border rounded px-2 py-1"
                                 >
-                                    <option value="Primary Family">Primary Family</option>
-                                    <option value="Secondary Family">Secondary Family</option>
                                     {fontFamilyOptions.map(opt => (
                                         <option value={opt.value} key={opt.value}>{opt.label}</option>
                                     ))}
