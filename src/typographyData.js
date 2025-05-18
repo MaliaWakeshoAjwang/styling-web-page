@@ -37,6 +37,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 700,
         color: "#0f1420",
         fontFamily: "Primary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Display Medium",
@@ -45,6 +47,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 700,
         color: "#0f1420",
         fontFamily: "Primary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Display Small",
@@ -53,6 +57,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 600,
         color: "#0f1420",
         fontFamily: "Primary Family",
+        letterSpacing: 0,
+        italic: false,
     },
 
     {
@@ -62,6 +68,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 700,
         color: "#0f1420",
         fontFamily: "Primary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Headline Medium",
@@ -70,6 +78,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 600,
         color: "#0f1420",
         fontFamily: "Primary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Headline Small",
@@ -78,6 +88,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 600,
         color: "#0f1420",
         fontFamily: "Primary Family",
+        letterSpacing: 0,
+        italic: false,
     },
 
     {
@@ -87,6 +99,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 500,
         color: "#0f1420",
         fontFamily: "Primary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Title Medium",
@@ -95,6 +109,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 500,
         color: "#0f1420",
         fontFamily: "Secondary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Title Small",
@@ -103,6 +119,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 500,
         color: "#0f1420",
         fontFamily: "Secondary Family",
+        letterSpacing: 0,
+        italic: false,
     },
 
     {
@@ -112,6 +130,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 400,
         color: "#0f1420",
         fontFamily: "Secondary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Label Medium",
@@ -120,6 +140,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 400,
         color: "#0f1420",
         fontFamily: "Secondary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Label Small",
@@ -128,6 +150,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 300,
         color: "#0f1420",
         fontFamily: "Secondary Family",
+        letterSpacing: 0,
+        italic: false,
     },
 
     {
@@ -137,6 +161,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 400,
         color: "#0f1420",
         fontFamily: "Secondary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Body Medium",
@@ -145,6 +171,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 400,
         color: "#0f1420",
         fontFamily: "Secondary Family",
+        letterSpacing: 0,
+        italic: false,
     },
     {
         name: "Body Small",
@@ -153,6 +181,8 @@ export const TYPOGRAPHY_STYLES = [
         fontWeight: 300,
         color: "#0f1420",
         fontFamily: "Secondary Family",
+        letterSpacing: 0,
+        italic: false,
     },
 
 ]
