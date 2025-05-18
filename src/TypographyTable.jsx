@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import {
-    FONT_FAMILIES,
     FONT_WEIGHTS,
     ALIGNMENTS,
     TYPOGRAPHY_STYLES,
 } from "./typographyData";
-import Select from "react-select";
 import WebFont from "webfontloader";
-import { GOOGLE_FONTS } from "./fonts";
 import GoogleFontPicker from "./GoogleFontPicker";
 
 export default function TypographyTable({
@@ -153,9 +150,8 @@ export default function TypographyTable({
                                     onChange={(e) => handleChange(idx, "fontFamily", e.target.value)}
                                     className="border rounded px-2 py-1"
                                 >
-                                    {fontFamilyOptions.map(opt => (
-                                        <option value={opt.value} key={opt.value}>{opt.label}</option>
-                                    ))}
+                                    <option value="Primary Family">Primary Family</option>
+                                    <option value="Secondary Family">Secondary Family</option>
                                 </select>
                             </td>
 
