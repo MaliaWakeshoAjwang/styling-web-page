@@ -5,6 +5,9 @@ import {
     ALIGNMENTS,
     TYPOGRAPHY_STYLES,
 } from "./typographyData";
+import Select from "react-select";
+import WebFont from "webfontloader";
+import { GOOGLE_FONTS } from "./fonts";
 
 export default function TypographyTable({
     colorOptions,
