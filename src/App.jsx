@@ -4,14 +4,15 @@ import { auth } from "./firebase/firebase";
 import LoginPage from "./Auth/LoginPage";
 import Tabs from "./Tabs";
 import ColorPalette from "./colors/ColorPalette";
-import TypographyTable from "./typography/TypographyTable";
 import InfoTab from "./info/InfoPage";
 import DemoPage from "./demo/DemoPage";
 import useAppData from "./hooks/useAppData";
 import ProjectsPage from "./projects/ProjectsPage";
 import { updateProjectPalette, updateProjectTypography } from "./projects/projectStore";
-import { TYPOGRAPHY_STYLES } from "./typography/typographyData";
+import { TYPOGRAPHY_STYLES } from "./typography/TypographyData";
 import { PALETTE_STYLES } from "./colors/colorData";
+import TypographyPage from "./typography/TypographyPage";
+
 
 export default function App() {
   const appData = useAppData();
@@ -21,6 +22,8 @@ export default function App() {
   const [currentProject, setCurrentProject] = useState(null);
   const [localPalette, setLocalPalette] = useState(PALETTE_STYLES);
   const [localTypography, setLocalTypography] = useState(TYPOGRAPHY_STYLES);
+  const [primaryFont, setPrimaryFont] = useState("Poppins");
+  const [secondaryFont, setSecondaryFont] = useState("Inter");
   const [paletteSaveStatus, setPaletteSaveStatus] = useState("");
   const [typographySaveStatus, setTypographySaveStatus] = useState("");
 
@@ -35,6 +38,8 @@ export default function App() {
     if (currentProject) {
       setLocalPalette(currentProject.palette || PALETTE_STYLES);
       setLocalTypography(currentProject.typography || TYPOGRAPHY_STYLES);
+      setPrimaryFont(currentProject.typography?.primaryFont || "Poppins");
+      setSecondaryFont(currentProject.typography?.secondaryFont || "Inter");
       setPaletteSaveStatus("");
       setTypographySaveStatus("");
     }
@@ -83,13 +88,14 @@ export default function App() {
   };
 
   // SAVE: Typography
-  const handleTypographyUpdate = async (projectId, updatedTypography) => {
+  const handleTypographyUpdate = async (projectId, {styles, primaryFont, secondaryFont}) => {
     setTypographySaveStatus("Saving...");
     try {
-      setLocalTypography(updatedTypography);
-      const safeTypography = removeUndefined(updatedTypography);
-      await updateProjectTypography(projectId, safeTypography);
-      setCurrentProject(cp => ({ ...cp, typography: safeTypography }));
+      await updateProjectTypography(projectId, { styles, primaryFont, secondaryFont });
+      setCurrentProject(cp => ({
+        ...cp,
+        typography: { styles, primaryFont, secondaryFont }
+      }));
       setTypographySaveStatus("Saved!");
     } catch (err) {
       setTypographySaveStatus("Save failed!");
@@ -163,22 +169,24 @@ export default function App() {
                   <>
                     <button
                       className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4"
-                      onClick={() => handleTypographyUpdate(currentProject.id, localTypography)}
+                      onClick={() => handleTypographyUpdate(currentProject.id, {
+                        styles: localTypography,
+                        primaryFont,
+                        secondaryFont,
+                      })}
                     >
-                      Save Typography
+                      Save
                     </button>
                     {typographySaveStatus && (
                       <span className="ml-4 text-sm text-gray-500">{typographySaveStatus}</span>
                     )}
-                    <TypographyTable
-                      colorOptions={appData.orderedColorOptions}
-                      primaryFont={appData.primaryFont}
-                      setPrimaryFont={appData.setPrimaryFont}
-                      secondaryFont={appData.secondaryFont}
-                      setSecondaryFont={appData.setSecondaryFont}
-                      googleFontsList={appData.googleFontsList}
-                      typography={localTypography || currentProject.typography}
+                    <TypographyPage
+                      typography={localTypography}
                       setTypography={setLocalTypography}
+                      primaryFont={primaryFont}
+                      setPrimaryFont={setPrimaryFont}
+                      secondaryFont={secondaryFont}
+                      setSecondaryFont={setSecondaryFont}
                     />
                   </>
                 ),
@@ -196,25 +204,6 @@ export default function App() {
         <Tabs
           tabs={[
             { label: "Info", content: <InfoTab /> },
-            {
-              label: "Colors",
-              content: <ColorPalette palette={appData.palette} setPalette={() => {}} />,
-            },
-            {
-              label: "Typography",
-              content: (
-                <TypographyTable
-                  colorOptions={appData.orderedColorOptions}
-                  primaryFont={appData.primaryFont}
-                  setPrimaryFont={appData.setPrimaryFont}
-                  secondaryFont={appData.secondaryFont}
-                  setSecondaryFont={appData.setSecondaryFont}
-                  googleFontsList={appData.googleFontsList}
-                  typography={appData.typography}
-                  setTypography={() => {}}
-                />
-              ),
-            },
             { label: "Demo", content: <DemoPage /> },
           ]}
           selected={selectedTab}

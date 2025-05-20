@@ -4,7 +4,7 @@ import React from "react";
 import { PALETTE_STYLES as palette } from "../colors/colorData";
 import { getAllColorsFromPalette } from "../colors/colorUtils";
 import { COLOR_USE_CASES } from "../colors/colorData";
-import { TYPOGRAPHY_STYLES, TYPOGRAPHY_USE_CASES } from "../typography/typographyData";
+import { TYPOGRAPHY_STYLES, TYPOGRAPHY_USE_CASES } from "../typography/TypographyData";
 
 export default function InfoPage() {
   // Get all colors from both light and dark palettes (no duplicates)
