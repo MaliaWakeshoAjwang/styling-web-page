@@ -1,25 +1,22 @@
 // src/demo/DemoPage.jsx
 import { useState } from "react";
-import { PALETTE_STYLES as palette } from "../colors/colorData";
-import { TYPOGRAPHY_STYLES } from "../typography/typographyData";
 
 // Utility: get a color value from the palette
 function getColor(palette, group, name, theme = "light") {
-  const arr = palette[theme][group];
-  const color = arr?.find(c => c.name === name);
+  const arr = palette?.[theme]?.[group] || [];
+  const color = arr.find(c => c.name === name);
   return color ? color.hex : "#000";
 }
 
-// Utility: get a typography style by name
-function getType(name) {
-  return TYPOGRAPHY_STYLES.find(t => t.name === name) || {};
+// Utility: get a typography style by name (from array)
+function getType(styles, name) {
+  return (styles || []).find(t => t.name === name) || {};
 }
 
-// Demo page definitions
 const demoPages = [
   {
     label: "Landing Page",
-    render: (palette, getType) => (
+    render: (palette, styles, fonts) => (
       <div
         style={{
           background: getColor(palette, "utility", "primary bg"),
@@ -30,15 +27,15 @@ const demoPages = [
         }}
       >
         <h1 style={{
-          ...getType("Display Large"),
-          fontFamily: "var(--font-primary)",
+          ...getType(styles, "Display Large"),
+          fontFamily: fonts.primaryFont,
           marginBottom: 12,
         }}>
           Welcome to Your App!
         </h1>
         <p style={{
-          ...getType("Body Large"),
-          fontFamily: "var(--font-secondary)",
+          ...getType(styles, "Body Large"),
+          fontFamily: fonts.secondaryFont,
           color: getColor(palette, "utility", "secondary text"),
         }}>
           This is a demo landing page using your design system.<br />
@@ -46,7 +43,7 @@ const demoPages = [
         </p>
         <button
           style={{
-            ...getType("Label Large"),
+            ...getType(styles, "Label Large"),
             background: getColor(palette, "brand", "primary"),
             color: "#fff",
             border: "none",
@@ -54,7 +51,7 @@ const demoPages = [
             padding: "12px 24px",
             marginTop: 32,
             cursor: "pointer",
-            fontFamily: "var(--font-primary)",
+            fontFamily: fonts.primaryFont,
           }}
         >
           Get Started
@@ -71,9 +68,9 @@ const demoPages = [
         >
           <div
             style={{
-              ...getType("Body Small"),
+              ...getType(styles, "Body Small"),
               color: getColor(palette, "utility", "secondary text"),
-              fontFamily: "var(--font-secondary)",
+              fontFamily: fonts.secondaryFont,
             }}
           >
             © {new Date().getFullYear()} Your Company Name · All rights reserved.
@@ -84,7 +81,7 @@ const demoPages = [
   },
   {
     label: "Card Example",
-    render: (palette, getType) => (
+    render: (palette, styles, fonts) => (
       <div
         style={{
           background: getColor(palette, "utility", "secondary bg"),
@@ -97,14 +94,14 @@ const demoPages = [
         }}
       >
         <h2 style={{
-          ...getType("Headline Large"),
-          fontFamily: "var(--font-primary)",
+          ...getType(styles, "Headline Large"),
+          fontFamily: fonts.primaryFont,
           marginBottom: 8,
         }}>Demo Card Headline</h2>
         <div
           style={{
-            ...getType("Body Medium"),
-            fontFamily: "var(--font-secondary)",
+            ...getType(styles, "Body Medium"),
+            fontFamily: fonts.secondaryFont,
             marginBottom: 24,
           }}
         >
@@ -112,13 +109,13 @@ const demoPages = [
         </div>
         <button
           style={{
-            ...getType("Label Medium"),
+            ...getType(styles, "Label Medium"),
             background: getColor(palette, "brand", "secondary"),
             color: "#fff",
             border: "none",
             borderRadius: 6,
             padding: "8px 20px",
-            fontFamily: "var(--font-primary)",
+            fontFamily: fonts.primaryFont,
             fontWeight: 700,
           }}
         >
@@ -129,7 +126,7 @@ const demoPages = [
   },
   {
     label: "Banner Example",
-    render: (palette, getType) => (
+    render: (palette, styles, fonts) => (
       <div
         style={{
           background: getColor(palette, "brand", "tertiary"),
@@ -143,8 +140,8 @@ const demoPages = [
       >
         <div
           style={{
-            ...getType("Display Medium"),
-            fontFamily: "var(--font-primary)",
+            ...getType(styles, "Display Medium"),
+            fontFamily: fonts.primaryFont,
             fontWeight: 700,
             fontSize: 36,
             letterSpacing: 0.5,
@@ -156,8 +153,8 @@ const demoPages = [
         </div>
         <div
           style={{
-            ...getType("Body Medium"),
-            fontFamily: "var(--font-secondary)",
+            ...getType(styles, "Body Medium"),
+            fontFamily: fonts.secondaryFont,
           }}
         >
           This is a banner using your brand tertiary color and display medium typography.
@@ -167,8 +164,15 @@ const demoPages = [
   },
 ];
 
-export default function DemoPage() {
+export default function DemoPage({ palette, typography }) {
   const [selected, setSelected] = useState(0);
+
+  // Handle case where data is not ready yet
+  const styles = Array.isArray(typography?.styles)
+    ? typography.styles
+    : typography || [];
+  const primaryFont = typography?.primaryFont || "Poppins";
+  const secondaryFont = typography?.secondaryFont || "Inter";
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -186,7 +190,12 @@ export default function DemoPage() {
           </button>
         ))}
       </div>
-      <div>{demoPages[selected].render(palette, getType)}</div>
+      <div>
+        {demoPages[selected].render(palette, styles, {
+          primaryFont,
+          secondaryFont,
+        })}
+      </div>
     </div>
   );
 }

@@ -202,7 +202,16 @@ export default function App() {
               },
               {
                 label: "Demo",
-                content: <DemoPage />,
+                content: (
+                  <DemoPage
+                    palette={currentProject?.palette || PALETTE_STYLES}
+                    typography={currentProject?.typography || {
+                      styles: TYPOGRAPHY_STYLES,
+                      primaryFont: "Poppins",
+                      secondaryFont: "Inter",
+                    }}
+                  />
+                )
               },
             ]}
             selected={selectedTab}
