@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+// Authentication
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase/firebase";
 import LoginPage from "./Auth/LoginPage";
+// Tabs
 import Tabs from "./Tabs";
-import ColorPalette from "./colors/ColorPalette";
 import InfoTab from "./info/InfoPage";
 import DemoPage from "./demo/DemoPage";
-import useAppData from "./hooks/useAppData";
 import ProjectsPage from "./projects/ProjectsPage";
-import { updateProjectPalette, updateProjectTypography } from "./projects/projectStore";
-import { TYPOGRAPHY_STYLES } from "./typography/TypographyData";
-import { PALETTE_STYLES } from "./colors/colorData";
 import TypographyPage from "./typography/TypographyPage";
+// Defaults, Project Data, Project Storing
+import ColorPalette from "./colors/ColorPalette";
+import { updateProjectPalette, updateProjectTypography } from "./projects/projectStore";
+import { TYPOGRAPHY_STYLES } from "./typography/typographyData";
+import { PALETTE_STYLES } from "./colors/colorData";
+
 
 
 export default function App() {
-  const appData = useAppData();
   const [user, setUser] = useState(undefined);
   const [selectedTab, setSelectedTab] = useState(0);
   const [showProjects, setShowProjects] = useState(false);
@@ -42,6 +44,11 @@ export default function App() {
       setSecondaryFont(currentProject.typography?.secondaryFont || "Inter");
       setPaletteSaveStatus("");
       setTypographySaveStatus("");
+      if (currentProject.typography){
+        setLocalTypography(currentProject.typography.styles || TYPOGRAPHY_STYLES);
+        setPrimaryFont(currentProject.typography.primaryFont || "Poppins");
+        setSecondaryFont(currentProject.typography.secondaryFont || "Inter");
+      }
     }
   }, [currentProject]);
 
@@ -56,7 +63,7 @@ export default function App() {
   // Not signed in
   if (!user) return <LoginPage />;
 
-  // Helper to remove undefineds (Firestore doesn't like them)
+  // Helper to remove undefineds
   function removeUndefined(obj) {
     if (Array.isArray(obj)) {
       return obj.map(removeUndefined);
@@ -87,14 +94,19 @@ export default function App() {
     }
   };
 
-  // SAVE: Typography
-  const handleTypographyUpdate = async (projectId, {styles, primaryFont, secondaryFont}) => {
+  const handleTypographyUpdate = async (projectId) => {
     setTypographySaveStatus("Saving...");
     try {
-      await updateProjectTypography(projectId, { styles, primaryFont, secondaryFont });
+      const data = {
+        styles: localTypography,
+        primaryFont,
+        secondaryFont,
+      };
+      const safeTypography = removeUndefined(data);
+      await updateProjectTypography(projectId, safeTypography);
       setCurrentProject(cp => ({
         ...cp,
-        typography: { styles, primaryFont, secondaryFont }
+        typography: safeTypography
       }));
       setTypographySaveStatus("Saved!");
     } catch (err) {
@@ -115,6 +127,7 @@ export default function App() {
           >
             {showProjects ? "Main Menu" : "My Projects"}
           </button>
+          
           <button
             className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded"
             onClick={() => signOut(auth)}
@@ -169,11 +182,7 @@ export default function App() {
                   <>
                     <button
                       className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4"
-                      onClick={() => handleTypographyUpdate(currentProject.id, {
-                        styles: localTypography,
-                        primaryFont,
-                        secondaryFont,
-                      })}
+                      onClick={() => handleTypographyUpdate(currentProject.id)}
                     >
                       Save
                     </button>

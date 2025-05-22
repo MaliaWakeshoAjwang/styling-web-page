@@ -1,5 +1,3 @@
-import React from "react";
-
 function ColorGroup({ groupName, colors, onUpdate }) {
   return (
     <div className="mb-4">

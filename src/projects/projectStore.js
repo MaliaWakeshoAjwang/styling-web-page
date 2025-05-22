@@ -1,9 +1,17 @@
 import { db } from "../firebase/firebase";
 import {
-  collection, addDoc, query, where, getDocs, updateDoc, deleteDoc, doc, serverTimestamp,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  deleteDoc,
+  doc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { PALETTE_STYLES } from "../colors/colorData";
-import { TYPOGRAPHY_STYLES } from "../typography/TypographyData";
+import { TYPOGRAPHY_STYLES } from "../typography/typographyData";
 
 export async function createProject(userId, name) {
   const docRef = await addDoc(collection(db, "projects"), {
@@ -11,7 +19,11 @@ export async function createProject(userId, name) {
     name,
     createdAt: serverTimestamp(),
     palette: PALETTE_STYLES,
-    typography: TYPOGRAPHY_STYLES,
+    typography: {
+      styles: TYPOGRAPHY_STYLES,
+      primaryFont: "Poppins",
+      secondaryFont: "Inter"
+    }
   });
   return docRef.id;
 }
@@ -31,11 +43,9 @@ export async function updateProjectPalette(projectId, updatedPalette) {
   return updateDoc(doc(db, "projects", projectId), { palette: updatedPalette });
 }
 
-// Save full typography styles and font choices
-export async function updateProjectTypography(projectId, { typography, primaryFont, secondaryFont }) {
+// updatedTypography should be an object: { styles: [...], primaryFont: "...", secondaryFont: "..." }
+export async function updateProjectTypography(projectId, updatedTypography) {
   return updateDoc(doc(db, "projects", projectId), {
-    typography,
-    primaryFont,
-    secondaryFont,
+    typography: updatedTypography,
   });
 }

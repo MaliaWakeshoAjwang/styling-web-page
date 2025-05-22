@@ -1,4 +1,5 @@
-import React from "react";
+// TypographyPage.jsx
+import { useEffect, useState } from "react";
 import TypographyTable from "./TypographyTable";
 import GoogleFontPicker from "./GoogleFontPicker";
 
@@ -13,12 +14,16 @@ export default function TypographyPage({
         <GoogleFontPicker value={primaryFont} onChange={setPrimaryFont} label="Primary Font" />
         <GoogleFontPicker value={secondaryFont} onChange={setSecondaryFont} label="Secondary Font" />
       </div>
-      <TypographyTable
-        typography={typography}
-        setTypography={setTypography}
-        primaryFont={primaryFont}
-        secondaryFont={secondaryFont}
-      />
+      {Array.isArray(typography) ? (
+        <TypographyTable
+          typography={typography}
+          setTypography={setTypography}
+          primaryFont={primaryFont}
+          secondaryFont={secondaryFont}
+        />
+      ) : (
+        <div style={{ color: "red" }}>Typography data is invalid.</div>
+      )}
     </div>
   );
 }

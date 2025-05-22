@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createProject, getProjects, deleteProject } from "./projectStore";
 
 export default function ProjectsPage({ user, onEdit }) {
@@ -38,10 +38,13 @@ export default function ProjectsPage({ user, onEdit }) {
         {projects.map(proj => (
           <li key={proj.id} className="flex justify-between items-center border-b py-2">
             <span>{proj.name}</span>
+
             <div>
               <button onClick={() => onEdit(proj)} className="mr-2 text-blue-700 underline">Edit</button>
+
               <button onClick={() => handleDelete(proj.id)} className="text-red-700 underline">Delete</button>
             </div>
+            
           </li>
         ))}
       </ul>

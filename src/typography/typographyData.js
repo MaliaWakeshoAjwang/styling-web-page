@@ -1,5 +1,3 @@
-// src/typography/TypographyData.js
-
 export const TYPOGRAPHY_STYLES = [
   {
     name: "Display Large",

@@ -1,6 +1,5 @@
 // src/demo/DemoPage.jsx
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { PALETTE_STYLES as palette } from "../colors/colorData";
 import { TYPOGRAPHY_STYLES } from "../typography/typographyData";
 
@@ -159,7 +158,6 @@ const demoPages = [
           style={{
             ...getType("Body Medium"),
             fontFamily: "var(--font-secondary)",
-            fontSize: 20,
           }}
         >
           This is a banner using your brand tertiary color and display medium typography.

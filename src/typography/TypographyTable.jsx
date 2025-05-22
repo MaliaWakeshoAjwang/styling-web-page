@@ -1,8 +1,5 @@
-import React from "react";
-
 export default function TypographyTable({
-  typography,
-  setTypography,
+  typography, setTypography,
   primaryFont,
   secondaryFont,
 }) {
@@ -17,6 +14,10 @@ export default function TypographyTable({
     if (fontFamily === "Secondary Family") return secondaryFont;
     return fontFamily;
   };
+
+  if (!Array.isArray(typography)) {
+    return <div className="text-red-600">Typography data is invalid.</div>;
+  }
 
   return (
     <table className="min-w-full border border-gray-200 text-sm">

@@ -1,0 +1,74 @@
+DEMO PAGE
+[ ] apply the project colors and typography to demo page.
+[ ] move demo utility functions into a demoUtility.js file
+[ ] create stylised functions for the text
+[ ] move each demo into their own separate file so that it is easier to navigate
+    [ ] Landing Page
+    [ ] Card Example
+    [ ] Banner Example
+[ ] make sure that all the colors used in the demo page is being pulled from the palette
+    [ ] landing page button text color (Get Started) [#fff]
+    [ ] landing page footer borderTop [#eee]
+    [ ] card example button text color (Learn More) [#fff]
+    [ ] banner example text color (whole div) [#fff]
+    [ ] banner example text color (Design for everyone) [#fff]
+[ ] on demo page make sure that all the different ares are used:
+    [ ] chat command: make more demo page demos. You must include the following colors (brand alternate, accent 1, accent 2, accent 3, accent 4, semantic success, semantic error, semantic warning, and semantic info) and the following typography (display small, headline medium, headline small, title large, title medium, title small, and label small)
+    [ ] Colors:
+        [ ] brand:
+            [x] primary - landing page button (Get Started)
+            [x] secondary - card example button (Learn More)
+            [x] tertiary - banner example background color
+            [ ] alternate
+        [x] utility:
+            [x] primary text - landing page (Welcome to Your App!)
+            [x] secondary text - landing page (This is a demo landing ...)
+            [x] primary background - landing page background
+            [x] secondary background - card example background
+        [ ] accent:
+            [ ] accent 1
+            [ ] accent 2
+            [ ] accent 3
+            [ ] accent 4
+        [ ] semantic:
+            [ ] success
+            [ ] error
+            [ ] warning
+            [ ] info
+
+    [ ] Typography:
+        [ ] display:
+            [x] large - landing page h1 (Welcome to Your App!)
+            [x] medium - banner example (Design for everyone)
+            [ ] small
+        [ ] headline:
+            [x] large - card example h2 (Demo Card Headline)
+            [ ] medium
+            [ ] small
+        [ ] title:
+            [ ] large
+            [ ] medium
+            [ ] small
+        [ ] label:
+            [x] large - landing page button (Get Started)
+            [x] medium - card example button (Learn More)
+            [ ] small
+        [x] body:
+            [x] large - landing page (This is a demo landing ...)
+            [x] medium - card example (This card demonstrates secondary ...)
+            [x] small - landing page footer
+
+
+COLORS:
+[ ] add a contrast color checker
+[ ] add a way to choose/select colors in color through changing the hex code directly (maybe using a different color picker tool)
+[ ] having a semantic value for each color
+
+EXTRA:
+[ ] design commonly used widgets - make sure they are using rem and responsive design
+    [ ] buttons
+    [ ] forms
+    [ ] login page
+[ ] different types of branding color schemes
+[ ] if any, which colors in the palette are okay to be the same?
+[ ] color theory when it comes to branding

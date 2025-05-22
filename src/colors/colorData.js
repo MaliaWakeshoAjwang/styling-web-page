@@ -53,8 +53,6 @@ export const PALETTE_STYLES = {
     }
   };
 
-  // src/colors/colorUseCases.js
-
 export const COLOR_USE_CASES = {
   // Brand Colors
   "brand - primary": "Main brand color, used for primary actions and highlights.",
