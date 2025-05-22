@@ -1,6 +1,6 @@
 DEMO PAGE
-[ ] apply the project colors and typography to demo page.
-[ ] move demo utility functions into a demoUtility.js file
+[x] apply the project colors and typography to demo page.
+[x] move demo utility functions into a demoUtility.js file
 [ ] create stylised functions for the text
 [ ] move each demo into their own separate file so that it is easier to navigate
     [ ] Landing Page

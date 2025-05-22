@@ -1,17 +1,6 @@
 // src/demo/DemoPage.jsx
 import { useState } from "react";
-
-// Utility: get a color value from the palette
-function getColor(palette, group, name, theme = "light") {
-  const arr = palette?.[theme]?.[group] || [];
-  const color = arr.find(c => c.name === name);
-  return color ? color.hex : "#000";
-}
-
-// Utility: get a typography style by name (from array)
-function getType(styles, name) {
-  return (styles || []).find(t => t.name === name) || {};
-}
+import { getColor, getType } from "./demoUtils";
 
 const demoPages = [
   {
