@@ -28,3 +28,17 @@ export function getAllColorsFromPalette(palette) {
 
   return Array.from(colorSet.values());
 }
+
+// This returns a list of { name, hex } for a theme (light/dark)
+export function getColorsFromTheme(themePalette) {
+  const colorList = [];
+  Object.entries(themePalette).forEach(([group, colors]) => {
+    colors.forEach(({ name, hex }) => {
+      colorList.push({
+        name, // just the color name, e.g. "primary"
+        hex,
+      });
+    });
+  });
+  return colorList;
+}

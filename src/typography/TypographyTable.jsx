@@ -1,8 +1,13 @@
+import { getColorsFromTheme } from "../colors/colorUtils";
+
 export default function TypographyTable({
   typography, setTypography,
   primaryFont,
   secondaryFont,
+  palette,
 }) {
+  const paletteColors = getColorsFromTheme(palette.light);
+
   const handleChange = (idx, field, value) => {
     setTypography(prev =>
       prev.map((row, i) => i === idx ? { ...row, [field]: value } : row)
@@ -85,11 +90,29 @@ export default function TypographyTable({
               />
             </td>
             <td className="py-2 px-3 border">
-              <input
-                type="color"
+              <select
                 value={style.color}
                 onChange={e => handleChange(idx, "color", e.target.value)}
-                className="w-8 h-8"
+                className="border rounded px-2 py-1"
+                style={{ minWidth: 125 }}
+              >
+                {paletteColors.map(opt => (
+                  <option key={opt.name} value={opt.hex}>
+                    {opt.name}
+                  </option>
+                ))}
+              </select>
+              <span
+                style={{
+                  display: "inline-block",
+                  width: 22,
+                  height: 22,
+                  borderRadius: 4,
+                  background: style.color,
+                  border: "1px solid #ccc",
+                  marginLeft: 7,
+                  verticalAlign: "middle"
+                }}
               />
             </td>
             <td className="py-2 px-3 border">

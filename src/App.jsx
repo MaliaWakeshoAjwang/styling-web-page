@@ -215,6 +215,7 @@ export default function App() {
                         setPrimaryFont={setPrimaryFont}
                         secondaryFont={secondaryFont}
                         setSecondaryFont={setSecondaryFont}
+                        palette={currentProject?.palette}
                       />
                     </>
                   ),

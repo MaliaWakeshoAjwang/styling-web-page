@@ -1,111 +1,117 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-// function isValidHex(hex) {
-//   return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex.trim());
-// }
+function isValidHex(hex) {
+  return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(hex.trim());
+}
 
-// function ColorGroup({ groupName, colors, onUpdate }) {
-//   // Local state for each color: input value and touched
-//   const [inputs, setInputs] = useState(
-//     colors.map(c => ({ value: c.hex, touched: false }))
-//   );
-
-//   // Keep local state in sync if colors change outside (optional enhancement)
-//   useEffect(() => { setInputs(colors.map(c => ({ value: c.hex, touched: false }))); }, [colors]);
-
-//   return (
-//     <div className="mb-4">
-//       <h3 className="font-semibold mb-2 capitalize">{groupName}</h3>
-//       <div className="flex flex-wrap gap-4">
-//         {colors.map((color, idx) => {
-//           const { value, touched } = inputs[idx];
-//           const invalid = touched && !isValidHex(value);
-
-//           return (
-//             <div key={color.name} className="flex flex-col items-center min-w-[70px]">
-//               {/* Swatch */}
-//               <input
-//                 type="color"
-//                 value={color.hex}
-//                 onChange={e => {
-//                   const hex = e.target.value;
-//                   setInputs(prev => {
-//                     const updated = [...prev];
-//                     updated[idx] = { value: hex, touched: true };
-//                     return updated;
-//                   });
-//                   onUpdate(idx, hex);
-//                 }}
-//                 style={{
-//                   width: 48,
-//                   height: 48,
-//                   borderRadius: 8,
-//                   border: '1px solid #ccc',
-//                   boxShadow: '0 1px 3px 0 #0002',
-//                   cursor: "pointer",
-//                 }}
-//               />
-//               <span className="text-xs mt-2">{color.name}</span>
-//               <input
-//                 type="text"
-//                 value={value}
-//                 maxLength={7}
-//                 onChange={e => {
-//                   let hex = e.target.value;
-//                   if (!hex.startsWith("#")) hex = "#" + hex;
-//                   setInputs(prev => {
-//                     const updated = [...prev];
-//                     updated[idx] = { value: hex, touched: true };
-//                     return updated;
-//                   });
-//                 }}
-//                 onBlur={() => {
-//                   setInputs(prev => {
-//                     const updated = [...prev];
-//                     updated[idx] = { ...updated[idx], touched: true };
-//                     return updated;
-//                   });
-//                   // If valid, update parent
-//                   if (isValidHex(value)) onUpdate(idx, value);
-//                 }}
-//                 className="text-xs mt-1 font-mono text-center border rounded px-1 w-[64px] focus:outline-none"
-//                 style={{
-//                   marginTop: 3,
-//                   letterSpacing: 0.5,
-//                   background: "#fff",
-//                   borderColor: invalid ? "#f44336" : "#ccc",
-//                   color: invalid ? "#f44336" : "#555",
-//                 }}
-//                 spellCheck={false}
-//               />
-//               {/* Optional: show small error */}
-//               {invalid && (
-//                 <span className="text-[10px] mt-1 text-red-500">Invalid hex</span>
-//               )}
-//             </div>
-//           );
-//         })}
-//       </div>
-//     </div>
-//   );
-// }
+function expandShortHex(hex) {
+  // Accepts #fff or #FFF, returns #FFFFFF
+  if (!hex) return hex;
+  hex = hex.toUpperCase();
+  if (/^#[A-F0-9]{3}$/.test(hex)) {
+    return (
+      "#" +
+      hex[1] +
+      hex[1] +
+      hex[2] +
+      hex[2] +
+      hex[3] +
+      hex[3]
+    );
+  }
+  return hex;
+}
 
 function ColorGroup({ groupName, colors, onUpdate }) {
+  // Local state for each color: input value and touched
+  const [inputs, setInputs] = useState(
+    colors.map(c => ({ value: c.hex.toUpperCase(), touched: false }))
+  );
+
+  // Keep local state in sync if colors change outside (optional enhancement)
+  useEffect(() => { setInputs(colors.map(c => ({ value: c.hex, touched: false }))); }, [colors]);
+
   return (
     <div className="mb-4">
       <h3 className="font-semibold mb-2 capitalize">{groupName}</h3>
       <div className="flex flex-wrap gap-4">
-        {colors.map((color, idx) => (
-          <div key={color.name} className="flex flex-col items-center">
-            <input
-              type="color"
-              value={color.hex}
-              onChange={e => onUpdate(idx, e.target.value)}
-              style={{ width: 48, height: 48 }}
-            />
-            <span className="text-xs mt-2">{color.name}</span>
-          </div>
-        ))}
+        {colors.map((color, idx) => {
+          const { value, touched } = inputs[idx];
+          const invalid = touched && !isValidHex(value);
+
+          return (
+            <div key={color.name} className="flex flex-col items-center min-w-[100px]">
+              {/* Swatch */}
+              <input
+                type="color"
+                value={color.hex.toUpperCase()}
+                onChange={e => {
+                  const hex = e.target.value.toUpperCase();
+                  setInputs(prev => {
+                    const updated = [...prev];
+                    updated[idx] = { value: hex, touched: true };
+                    return updated;
+                  });
+                  onUpdate(idx, hex);
+                }}
+                style={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: 8,
+                  border: '1px solid #ccc',
+                  boxShadow: '0 1px 3px 0 #0002',
+                  cursor: "pointer",
+                }}
+              />
+              <span className="text-xs mt-2">{color.name}</span>
+              <input
+                type="text"
+                value={value.toUpperCase()}
+                maxLength={7}
+                onChange={e => {
+                  let hex = e.target.value;
+                  if (!hex.startsWith("#")) hex = "#" + hex;
+                  setInputs(prev => {
+                    const updated = [...prev];
+                    updated[idx] = { value: hex, touched: true };
+                    return updated;
+                  });
+                }}
+                onBlur={() => {
+                  setInputs(prev => {
+                    const updated = [...prev];
+                    updated[idx] = { ...updated[idx], touched: true };
+                    return updated;
+                  });
+                  // If valid, update parent
+                    // If valid, expand if needed and update parent
+                  if (isValidHex(value)) {
+                    const expanded = expandShortHex(value);
+                    onUpdate(idx, expanded);
+                    setInputs(prev => {
+                      const updated = [...prev];
+                      updated[idx] = { ...updated[idx], value: expanded };
+                      return updated;
+                    });
+                  }
+                }}
+                className="text-xs mt-1 font-mono text-center px-1 w-[64px] focus:outline-none"
+                style={{
+                  marginTop: 3,
+                  letterSpacing: 0.5,
+                  background: "#fff",
+                  borderColor: invalid ? "#f44336" : "#ccc",
+                  color: invalid ? "#f44336" : "#555",
+                }}
+                spellCheck={false}
+              />
+              {/* Optional: show small error */}
+              {invalid && (
+                <span className="text-[10px] mt-1 text-red-500">Invalid hex</span>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
