@@ -23,3 +23,23 @@ export function getColor(palette, group, name, theme = "light") {
 export function getType(styles, name) {
   return (styles || []).find(t => t.name === name) || {};
 }
+
+export function hexToRgba(hex, alpha = 0.06) {
+  hex = hex.replace("#", "");
+  if (hex.length === 3) hex = hex.split("").map(x => x + x).join("");
+  const num = parseInt(hex, 16);
+  const r = (num >> 16) & 255;
+  const g = (num >> 8) & 255;
+  const b = num & 255;
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+export function font(type, fonts = {}) {
+  const fontFamily =
+    fonts[type.fontFamily === "Primary Family" ? "primaryFont" : "secondaryFont"];
+  return {
+    ...type,
+    fontStyle: type.italic ? "italic" : "normal",
+    fontFamily,
+  };
+}

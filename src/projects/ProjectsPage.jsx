@@ -3,10 +3,32 @@ import { createProject, getProjects, deleteProject } from "./projectStore";
 
 export default function ProjectsPage({ user, onEdit }) {
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [newName, setNewName] = useState("");
+  
   useEffect(() => {
     getProjects(user.uid).then(setProjects);
   }, [user]);
+
+  useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    getProjects(user.uid).then(res => {
+      if (mounted) setProjects(res);
+    }).finally(() => {
+      if (mounted) setLoading(false);
+    });
+    return () => { mounted = false };
+  }, [user.uid]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-64">
+        <span className="text-lg font-semibold text-blue-600">Loading projects...</span>
+        {/* Replace with spinner SVG or animation if you prefer */}
+      </div>
+    );
+  }
 
   const handleCreate = async () => {
     if (!newName) return;

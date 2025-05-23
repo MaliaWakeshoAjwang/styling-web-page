@@ -28,6 +28,7 @@ export default function App() {
   const [secondaryFont, setSecondaryFont] = useState("Inter");
   const [paletteSaveStatus, setPaletteSaveStatus] = useState("");
   const [typographySaveStatus, setTypographySaveStatus] = useState("");
+  const [loadingProjects, setLoadingProjects] = useState(false);
 
   // Watch for auth changes and project changes
   useEffect(() => {
@@ -115,6 +116,17 @@ export default function App() {
     }
   };
 
+  const handleShowProjects = async () => {
+  setLoadingProjects(true);
+  try {
+    // Your fetchProjects code here
+    await fetchProjects();
+  } finally {
+    setLoadingProjects(false);
+  }
+  setShowProjects(true);
+};
+
   // Main render
   return (
     <div className="min-h-screen bg-gray-100 p-10">
@@ -138,96 +150,98 @@ export default function App() {
       </div>
 
       {showProjects ? (
-        <ProjectsPage
-          user={user}
-          onEdit={proj => {
-            setCurrentProject(proj);
-            setShowProjects(false);
-          }}
-        />
-      ) : currentProject ? (
-        <>
-          <div className="mb-6 text-xl font-semibold text-blue-700">
-            Editing Project: <span className="font-bold">{currentProject.name}</span>
+        loadingProjects ? (
+          <div className="flex flex-col items-center justify-center min-h-64">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-600 border-b-2 mb-3" />
+            <span className="text-lg font-semibold text-blue-600">Loading projects...</span>
           </div>
+        ) : (
+          <ProjectsPage
+            user={user}
+            onEdit={proj => {
+              setCurrentProject(proj);
+              setShowProjects(false);
+            }}
+          />
+        )
+      ) : currentProject ? (
+          <>
+            <div className="mb-6 text-xl font-semibold text-blue-700">
+              Editing Project: <span className="font-bold">{currentProject.name}</span>
+            </div>
+            <Tabs
+              tabs={[
+                {
+                  label: "Info",
+                  content: <InfoTab />,
+                },
+                {
+                  label: "Colors",
+                  content: (
+                    <>
+                      <button
+                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4"
+                        onClick={() => handlePaletteUpdate(currentProject.id, localPalette)}
+                      >
+                        Save Colors
+                      </button>
+                      {paletteSaveStatus && (
+                        <span className="ml-4 text-sm text-gray-500">{paletteSaveStatus}</span>
+                      )}
+                      <ColorPalette
+                        palette={localPalette}
+                        setPalette={setLocalPalette}
+                      />
+                    </>
+                  ),
+                },
+                {
+                  label: "Typography",
+                  content: (
+                    <>
+                      <button
+                        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4"
+                        onClick={() => handleTypographyUpdate(currentProject.id)}
+                      >
+                        Save
+                      </button>
+                      {typographySaveStatus && (
+                        <span className="ml-4 text-sm text-gray-500">{typographySaveStatus}</span>
+                      )}
+                      <TypographyPage
+                        typography={localTypography}
+                        setTypography={setLocalTypography}
+                        primaryFont={primaryFont}
+                        setPrimaryFont={setPrimaryFont}
+                        secondaryFont={secondaryFont}
+                        setSecondaryFont={setSecondaryFont}
+                      />
+                    </>
+                  ),
+                },
+                {
+                  label: "Demo",
+                  content: (
+                    <DemoPage
+                      palette={currentProject?.palette}
+                      typography={currentProject?.typography}
+                    />
+                  )
+                },
+              ]}
+              selected={selectedTab}
+              onChange={setSelectedTab}
+            />
+          </>
+        ) : (
           <Tabs
             tabs={[
-              {
-                label: "Info",
-                content: <InfoTab />,
-              },
-              {
-                label: "Colors",
-                content: (
-                  <>
-                    <button
-                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4"
-                      onClick={() => handlePaletteUpdate(currentProject.id, localPalette)}
-                    >
-                      Save Colors
-                    </button>
-                    {paletteSaveStatus && (
-                      <span className="ml-4 text-sm text-gray-500">{paletteSaveStatus}</span>
-                    )}
-                    <ColorPalette
-                      palette={localPalette}
-                      setPalette={setLocalPalette}
-                    />
-                  </>
-                ),
-              },
-              {
-                label: "Typography",
-                content: (
-                  <>
-                    <button
-                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4"
-                      onClick={() => handleTypographyUpdate(currentProject.id)}
-                    >
-                      Save
-                    </button>
-                    {typographySaveStatus && (
-                      <span className="ml-4 text-sm text-gray-500">{typographySaveStatus}</span>
-                    )}
-                    <TypographyPage
-                      typography={localTypography}
-                      setTypography={setLocalTypography}
-                      primaryFont={primaryFont}
-                      setPrimaryFont={setPrimaryFont}
-                      secondaryFont={secondaryFont}
-                      setSecondaryFont={setSecondaryFont}
-                    />
-                  </>
-                ),
-              },
-              {
-                label: "Demo",
-                content: (
-                  <DemoPage
-                    palette={currentProject?.palette || PALETTE_STYLES}
-                    typography={currentProject?.typography || {
-                      styles: TYPOGRAPHY_STYLES,
-                      primaryFont: "Poppins",
-                      secondaryFont: "Inter",
-                    }}
-                  />
-                )
-              },
+              { label: "Info", content: <InfoTab /> },
             ]}
             selected={selectedTab}
             onChange={setSelectedTab}
           />
-        </>
-      ) : (
-        <Tabs
-          tabs={[
-            { label: "Info", content: <InfoTab /> },
-            { label: "Demo", content: <DemoPage /> },
-          ]}
-          selected={selectedTab}
-          onChange={setSelectedTab}
-        />
-      )}
+        )}
     </div>
   );
 }
