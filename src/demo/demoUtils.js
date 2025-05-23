@@ -34,12 +34,31 @@ export function hexToRgba(hex, alpha = 0.06) {
   return `rgba(${r},${g},${b},${alpha})`;
 }
 
+export function resolveTypographyColor(type, palette) {
+  // Utility group (most common for text)
+  let found = palette.utility?.find(c => c.name === type.color);
+  if (!found) found = palette.brand?.find(c => c.name === type.color);
+  if (!found) found = palette.accent?.find(c => c.name === type.color);
+  if (!found) found = palette.semantic?.find(c => c.name === type.color);
+
+  return found ? found.hex : type.color || "#222"; // fallback to type.color if not found
+}
+
 export function font(type, fonts = {}) {
-  const fontFamily =
-    fonts[type.fontFamily === "Primary Family" ? "primaryFont" : "secondaryFont"];
+  const fontFamily = fonts[type.fontFamily === "Primary Family" ? "primaryFont" : "secondaryFont"];
   return {
     ...type,
     fontStyle: type.italic ? "italic" : "normal",
     fontFamily,
+  };
+}
+
+export function font2(type, fonts = {}, palette) {
+  const fontFamily = fonts[type.fontFamily === "Primary Family" ? "primaryFont" : "secondaryFont"];
+  return {
+    ...type,
+    fontStyle: type.italic ? "italic" : "normal",
+    fontFamily,
+    color: resolveTypographyColor(type, palette.light),
   };
 }

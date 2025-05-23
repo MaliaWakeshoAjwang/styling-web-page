@@ -40,7 +40,13 @@ export default function TypographyTable({
         </tr>
       </thead>
       <tbody>
-        {typography.map((style, idx) => (
+        {typography.map((style, idx) =>  {
+        const currentColorHex =
+            palette.light.utility.find(c => c.name === style.color)?.hex
+            || palette.light.brand.find(c => c.name === style.color)?.hex
+            || palette.light.accent.find(c => c.name === style.color)?.hex
+            || palette.light.semantic.find(c => c.name === style.color)?.hex;
+        return (
           <tr key={style.name}>
             <td className="py-2 px-3 border bg-gray-50 font-semibold">{style.name}</td>
             <td className="py-2 px-3 border">
@@ -97,7 +103,7 @@ export default function TypographyTable({
                 style={{ minWidth: 125 }}
               >
                 {paletteColors.map(opt => (
-                  <option key={opt.name} value={opt.hex}>
+                  <option key={opt.name} value={opt.name}>
                     {opt.name}
                   </option>
                 ))}
@@ -108,7 +114,7 @@ export default function TypographyTable({
                   width: 22,
                   height: 22,
                   borderRadius: 4,
-                  background: style.color,
+                  background: currentColorHex,
                   border: "1px solid #ccc",
                   marginLeft: 7,
                   verticalAlign: "middle"
@@ -133,14 +139,15 @@ export default function TypographyTable({
                 letterSpacing: `${style.letterSpacing}px`,
                 lineHeight: style.lineHeight,
                 fontStyle: style.italic ? "italic" : "normal",
-                color: style.color,
+                color: currentColorHex,
                 fontFamily: getActualFontFamily(style.fontFamily),
               }}
             >
               {style.example}
             </td>
           </tr>
-        ))}
+        );
+      })}
       </tbody>
     </table>
   );

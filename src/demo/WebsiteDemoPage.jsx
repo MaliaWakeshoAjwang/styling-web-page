@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getColor, getType, hexToRgba, font } from "./demoUtils";
+import { getColor, getType, hexToRgba, font, resolveTypographyColor, font2 } from "./demoUtils";
 import InfoIcon from "./demos/icons/InfoIcon";
 import SubmitButton from "./demos/components/SubmitButton";
 
@@ -53,8 +53,7 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                     padding: "0 32px"
                 }}>
                     <div style={{
-                        ...font(getType(styles, "Display Small"), fonts),
-                        color: getColor(palette, "brand", "alternate"),
+                        ...font2(getType(styles, "Display Small"), fonts, palette),
                         letterSpacing: 0.5
                     }}>
                         Acme Studio
@@ -94,8 +93,8 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                         }}/>
                         
                         <div style={{
-                            ...font(getType(styles, "Label Medium"), fonts),
-                            color: getColor(palette, "utility", "primary text"),
+                            ...font(getType(styles, "Label Medium"), fonts, palette),
+                            // color: getColor(palette, "utility", "primary text"),
                             fontWeight: 700,
                         }}
                         >
@@ -105,21 +104,19 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                 )}
 
                 <div style={{
-                    color: getColor(palette, "utility", "primary text"),
                     padding: 32,
                     borderRadius: 12,
                 }}>
 
                     <h1 style={{
-                        ...font(getType(styles, "Display Large"),fonts),
+                        ...font(getType(styles, "Display Large"),fonts, palette),
                         marginBottom: 12,
                     }}>
                         Welcome to Your App!
                     </h1>
 
                     <p style={{
-                        ...font(getType(styles, "Body Large"), fonts),
-                        color: getColor(palette, "utility", "secondary text"),
+                        ...font(getType(styles, "Body Large"), fonts, palette),
                     }}>
                         This is a demo landing page using your design system.<br />
                         Every color and text style here is mapped to its intended use case.
@@ -127,9 +124,8 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                     <div style={{ display: "flex", gap: 18 }}>
                         <button
                             style={{
-                                ...font(getType(styles, "Label Large"),fonts),
+                                ...font(getType(styles, "Label Large"),fonts, palette),
                                 background: getColor(palette, "brand", "primary"),
-                                color: getColor(palette, "utility", "primary text"),
                                 border: "none",
                                 borderRadius: 6,
                                 padding: "12px 24px",
@@ -142,9 +138,8 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                         {/* Secondary Button */}
                         <button
                             style={{
-                                ...font(getType(styles, "Label Large"),fonts),
+                                ...font(getType(styles, "Label Large"),fonts, palette),
                                 background: getColor(palette, "brand", "secondary"),
-                                color: getColor(palette, "utility", "primary text"),
                                 border: "none",
                                 borderRadius: 6,
                                 padding: "12px 24px",
@@ -192,8 +187,7 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                             </div>
                             
                             <div style={{
-                                ...font(getType(styles, "Body Medium"),fonts),
-                                color: getColor(palette, "utility", "secondary text"),
+                                ...font(getType(styles, "Body Medium"),fonts, palette),
                                 marginBottom: 18,
                                 maxWidth: 350,
                             }}>
@@ -218,11 +212,10 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                     }}>
 
                         <div style={{
-                            ...font(getType(styles, "Headline Large"),fonts),
+                            ...font(getType(styles, "Headline Large"),fonts, palette),
                             width: 60,
                             height: 60,
                             borderRadius: 12,
-                            color: getColor(palette, "accent", "accent 4"),
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
@@ -239,8 +232,7 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                         </div>
 
                         <div style={{
-                            ...font(getType(styles, "Label Small"),fonts),
-                            color: getColor(palette, "utility", "secondary text"),
+                            ...font(getType(styles, "Label Small"),fonts, palette),
                             opacity: 0.85,
                             textAlign: "center",
                             fontWeight: 400,
@@ -284,22 +276,20 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                 {/* brand tertiary */}
                 <div style={{
                     background: getColor(palette, "brand", "tertiary"),
-                    color: getColor(palette, "utility", "primary text"),
                     borderRadius: 10,
                     padding: "36px 24px",
                     textAlign: "center",
                     margin: 16,
                 }}>
                     <div style={{
-                        ...font(getType(styles, "Display Medium"),fonts),
+                        ...font(getType(styles, "Display Medium"),fonts, palette),
                         marginBottom: 6,
-                        color: getColor(palette, "utility", "primary text"),
                     }}>
                         Design for everyone
                     </div>
 
                     <div style={{
-                        ...font(getType(styles, "Body Medium"),fonts),
+                        ...font(getType(styles, "Body Medium"),fonts, palette),
                     }}>
                         This is a banner using your brand tertiary color and display medium typography.
                     </div>
@@ -308,7 +298,7 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                 <div style={{ marginTop: 38, marginBottom: 32 }}>
                     {/* Large Title */}
                     <div style={{
-                        ...font(getType(styles, "Title Large"),fonts),
+                        ...font(getType(styles, "Title Large"),fonts, palette),
                         marginBottom: 4,
                     }}>
                         Ready to Get Started?
@@ -316,24 +306,21 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
 
                     {/* Medium Title */}
                     <div style={{
-                        ...font(getType(styles, "Title Medium"),fonts),
+                        ...font(getType(styles, "Title Medium"),fonts, palette),
                         marginBottom: 10,
-                        color: getColor(palette, "utility", "secondary text"),
                     }}>
                         Discover all the features your workspace offers.
                     </div>
 
                     {/* Paragraph with accent 1 link */}
                     <div style={{
-                        ...font(getType(styles, "Body Medium"),fonts),
-                        color: getColor(palette, "utility", "primary text"),
+                        ...font(getType(styles, "Body Medium"),fonts, palette),
                     }}
                     >
                         Explore our documentation to learn more about how to use your dashboard, customize your preferences, and collaborate with your team.&nbsp;
                     <a
                         href="#"
                         style={{
-                            color: getColor(palette, "accent", "accent 1"),
                             textDecoration: "underline",
                             fontWeight: 600,
                             cursor: "pointer",
@@ -356,9 +343,8 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                     boxShadow: `0 4px 28px ${hexToRgba(getColor(palette, "brand", "primary"), 0.07)}`,
                 }}>
                     <div style={{
-                        ...font(getType(styles, "Headline Medium"),fonts),
+                        ...font(getType(styles, "Headline Medium"),fonts, palette),
                         marginBottom: 20,
-                        color: getColor(palette, "utility", "primary text"),
                     }}>
                         Contact Us
                     </div>
@@ -370,11 +356,10 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                                 key={tabObj.key}
                                 type="button"
                                 style={{
-                                    ...font(getType(styles, "Label Small"),fonts),
+                                    ...font(getType(styles, "Label Small"),fonts, palette),
                                     background: tab === tabObj.key
                                     ? getColor(palette, "semantic", tabObj.key)
                                     : getColor(palette, "utility", "primary bg"),
-                                    color: getColor(palette, "utility", "primary text"),
                                     borderRadius: 7,
                                     padding: "8px 18px",
                                     fontWeight: 700,
@@ -396,7 +381,7 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                         else if (tab === "warning") setMsg("Warning: Please check your input.");
                     }}>
                         <label style={{
-                            ...font(getType(styles, "Label Small"),fonts),
+                            ...font(getType(styles, "Label Small"),fonts, palette),
                             display: "block",
                             marginBottom: 10,
                         }}>
@@ -441,8 +426,7 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                                                 top: "50%",
                                                 transform: "translateY(-50%)",
                                                 background: getColor(palette, "utility", "secondary bg"),
-                                                color: getColor(palette, "semantic", "info"),
-                                                ...font(getType(styles, "Title Small"),fonts),
+                                                ...font(getType(styles, "Title Small"),fonts, palette),
                                                 padding: "12px 16px",
                                                 borderRadius: 9,
                                                 zIndex: 2,
@@ -469,8 +453,7 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
 
                         {tab === "info" && (
                             <div style={{
-                                ...font(getType(styles, "Title Small"),fonts),
-                                color: getColor(palette, "semantic", "info"),
+                                ...font(getType(styles, "Title Small"),fonts, palette),
                                 marginTop: 12,
                             }}>
                                 On this page, hover over the info icon to see how an info message is displayed.
@@ -479,8 +462,7 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
 
                         {msg && (
                             <div style={{
-                                ...font(getType(styles, "Title Small"),fonts),
-                                color: getColor(palette, "semantic", tab),
+                                ...font(getType(styles, "Title Small"),fonts, palette),
                                 marginTop: 13,
                                 minHeight: 22,
                             }}>
@@ -499,11 +481,10 @@ export default function WebsiteDemoPage({ palette, styles, fonts }) {
                 padding: "34px 0 0 0",
                 borderTop: `1.5px solid ${getColor(palette, "utility", "secondary bg")}`,
                 background: getColor(palette, "utility", "primary bg"),
-                color: getColor(palette, "utility", "secondary text"),
                 textAlign: "center",
             }}>
                 <div style={{
-                    ...font(getType(styles, "Body Small"),fonts),
+                    ...font(getType(styles, "Body Small"),fonts, palette),
                     paddingBottom: 16
                 }}>
                     &copy; {new Date().getFullYear()} Acme Studio &mdash; All rights reserved.
